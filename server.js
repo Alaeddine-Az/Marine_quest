@@ -24,7 +24,7 @@ const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // Handle SPA routing
-app.get('*', (req, res) => {
+app.get(/.*/, (req, res) => {
   // Skip if request is for socket.io (handled by io instance, but good to be safe)
   if (req.path.startsWith('/socket.io')) return;
 
