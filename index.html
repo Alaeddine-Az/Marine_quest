@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Maritime Quest</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sea: {
+              900: '#0a192f',
+              800: '#112240',
+              700: '#233554',
+              600: '#3e5f8a',
+              500: '#5e81ac',
+            },
+            wood: {
+              DEFAULT: '#8B4513',
+              light: '#A0522D',
+              dark: '#3E2723',
+              accent: '#D7CCC8',
+            },
+            parchment: {
+              DEFAULT: '#fdf5e6',
+              dark: '#e6dcc0',
+            },
+            gold: {
+              DEFAULT: '#FFD700',
+              dim: '#B8860B',
+              glow: '#FFF8DC',
+            },
+            rose: {
+              DEFAULT: '#BE123C', // Thorn color actually
+              flower: '#F43F5E',
+            },
+            emerald: {
+              DEFAULT: '#059669',
+            }
+          },
+          fontFamily: {
+            serif: ['Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
+            sans: ['Lato', 'sans-serif'],
+          },
+          animation: {
+            'float': 'float 4s ease-in-out infinite',
+            'float-delayed': 'float 4s ease-in-out 2s infinite',
+            'wave': 'wave 20s linear infinite',
+            'wave-slow': 'wave 30s linear infinite',
+            'shine': 'shine 2s linear infinite',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'flip': 'flip 0.6s forwards',
+            'shake': 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-15px)' },
+            },
+            wave: {
+              '0%': { backgroundPosition: '0% 0%' },
+              '100%': { backgroundPosition: '100% 0%' },
+            },
+            shine: {
+              '0%': { backgroundPosition: '200% center' },
+              '100%': { backgroundPosition: '-200% center' },
+            },
+            flip: {
+              '0%': { transform: 'rotateY(0)' },
+              '100%': { transform: 'rotateY(180deg)' },
+            },
+            shake: {
+              '10%, 90%': { transform: 'translate3d(-1px, 0, 0)' },
+              '20%, 80%': { transform: 'translate3d(2px, 0, 0)' },
+              '30%, 50%, 70%': { transform: 'translate3d(-4px, 0, 0)' },
+              '40%, 60%': { transform: 'translate3d(4px, 0, 0)' },
+            }
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Pirata+One&family=Uncial+Antiqua&family=Lato:wght@400;700;900&display=swap');
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: #0a192f;
+      color: #fdf5e6;
+      overflow-x: hidden;
+    }
+
+    .font-pirate {
+      font-family: 'Cinzel Decorative', cursive;
+      font-weight: 700;
+    }
+
+    .shadow-high-contrast {
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.8);
+    }
+
+    .lantern-glow {
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), inset 0 0 10px rgba(255, 215, 0, 0.1);
+    }
+
+    .text-shadow-sm {
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .glass-panel {
+      background: rgba(10, 25, 47, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+
+    .glass-button {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .glass-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 215, 0, 0.6);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .gold-border {
+      border: 1px solid rgba(255, 215, 0, 0.4);
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
+    }
+
+    .text-glow-gold {
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+    }
+
+    .lantern-glow {
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.15), inset 0 0 20px rgba(255, 215, 0, 0.05);
+    }
+
+    .perspective-1000 {
+      perspective: 1000px;
+    }
+
+    .preserve-3d {
+      transform-style: preserve-3d;
+    }
+
+    .backface-hidden {
+      backface-visibility: hidden;
+    }
+
+    .rotate-y-180 {
+      transform: rotateY(180deg);
+    }
+
+    /* Ocean Animation Background */
+    .ocean-bg {
+      background: url('https://www.transparenttextures.com/patterns/dark-matter.png'),
+        linear-gradient(180deg, #0a192f 0%, #112240 100%);
+    }
+
+    .wave-layer {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 88.7'%3E%3Cpath d='M800 56.9c-155.5 0-204.9-50-405.5-49.9-200 0-250 49.9-394.5 49.9v31.8h800v-.2-31.6z' fill='%23003F7C'/%3E%3C/svg%3E");
+      background-position: 0 bottom;
+      background-repeat: repeat-x;
+      background-size: 50% auto;
+    }
+
+    .wood-texture {
+      background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+      background-color: #3E2723;
+    }
+
+    .parchment-texture {
+      background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+      background-color: #fdf5e6;
+    }
+
+    /* Custom scrollbar for chat logs */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #112240;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #8B4513;
+      border-radius: 4px;
+    }
+
+    .animate-float-slow {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @media print {
+
+      /* Hide everything by default */
+      body * {
+        visibility: hidden;
+      }
+
+      /* Reset background */
+      body {
+        background: white !important;
+        color: black !important;
+      }
+
+      /* Show only the printable map area */
+      #printable-map,
+      #printable-map * {
+        visibility: visible;
+      }
+
+      #printable-map {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 20px;
+        border: none !important;
+        box-shadow: none !important;
+        background: white !important;
+        /* Override parchment texture */
+      }
+
+      /* Hide buttons specifically if they are inside the printable area */
+      .print\:hidden {
+        display: none !important;
+      }
+
+      /* Ensure text is legible */
+      h1,
+      h2,
+      h3,
+      p,
+      li {
+        color: black !important;
+        text-shadow: none !important;
+      }
+    }
+  </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "socket.io-client": "https://cdn.socket.io/4.7.5/socket.io.esm.min.js"
+  }
+}
+</script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+
+<body class="ocean-bg min-h-screen">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>

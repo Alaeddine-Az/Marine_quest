@@ -1,0 +1,258 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --wood-dark: #3E2723;
+  --wood-light: #8D6E63;
+  --parchment: #FDF5E6;
+  --gold: #FFD700;
+  --sea-dark: #001f3f;
+  --burgundy: #800020;
+}
+
+body {
+  margin: 0;
+  font-family: 'Uncial Antiqua', serif;
+  background-color: var(--sea-dark);
+  color: var(--parchment);
+}
+
+/* Custom Fonts */
+.font-pirate {
+  font-family: 'Pirata One', cursive;
+}
+
+.font-cinzel {
+  font-family: 'Cinzel Decorative', cursive;
+}
+
+.font-crimson {
+  font-family: 'Crimson Text', serif;
+}
+
+/* Backgrounds */
+.ocean-bg {
+  background: radial-gradient(circle at center, #003366 0%, #001f3f 100%);
+  background-size: cover;
+}
+
+.bg-wood {
+  background-color: var(--wood-dark);
+}
+
+.bg-wood-texture {
+  background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
+  background-color: var(--wood-dark);
+}
+
+.bg-parchment-texture {
+  background-color: var(--parchment);
+  background-image: url("https://www.transparenttextures.com/patterns/aged-paper.png");
+}
+
+.bg-parchment-aged {
+  background-color: #fdf5e6;
+  background-image: 
+    url("https://www.transparenttextures.com/patterns/aged-paper.png"),
+    radial-gradient(circle at 50% 50%, rgba(139, 69, 19, 0.05) 0%, rgba(139, 69, 19, 0.15) 100%);
+  box-shadow: inset 0 0 100px rgba(62, 39, 35, 0.2);
+}
+
+/* Utilities */
+.text-gold {
+  color: var(--gold);
+}
+
+.text-burgundy {
+  color: var(--burgundy);
+}
+
+.border-gold {
+  border-color: var(--gold);
+}
+
+.glass-panel {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-button {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.glass-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Report Specifics */
+.border-filigree {
+  border: 2px solid var(--gold);
+  position: relative;
+}
+
+.border-filigree::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  border: 1px solid var(--gold);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 5s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes wave {
+  0% { background-position-x: 0; }
+  100% { background-position-x: 1000px; }
+}
+
+.animate-wave {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%230099ff' fill-opacity='1' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  animation: wave 20s linear infinite;
+}
+
+.animate-wave-slow {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%230066cc' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  animation: wave 30s linear infinite reverse;
+}
+
+/* Effects */
+.lantern-glow {
+  box-shadow: 0 0 50px rgba(255, 215, 0, 0.2), inset 0 0 30px rgba(255, 165, 0, 0.1);
+}
+
+.text-glow-gold {
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+.shadow-high-contrast {
+  box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* PRINT STYLES */
+@media print {
+  @page {
+    margin: 0;
+    size: auto;
+  }
+
+  body {
+    background: none;
+    color: black;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .ocean-bg {
+    background: none !important;
+    min-height: 0 !important;
+    display: block !important;
+    padding: 0 !important;
+  }
+
+  /* Hide UI elements */
+  .glass-panel, 
+  .glass-button,
+  button,
+  .leaderboard-panel,
+  .wave-layer,
+  .animate-float,
+  .animate-float-slow,
+  header,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Show print elements */
+  .print\:block {
+    display: block !important;
+  }
+
+  .print\:shadow-none {
+    box-shadow: none !important;
+  }
+
+  .print\:border-4 {
+    border-width: 4px !important;
+  }
+
+  .print\:animate-none {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .print\:p-8 {
+    padding: 2rem !important;
+  }
+
+  .print\:w-full {
+    width: 100% !important;
+  }
+
+  .print\:max-w-none {
+    max-width: none !important;
+  }
+
+  /* Page Breaks */
+  .break-after-page {
+    page-break-after: always;
+    break-after: page;
+  }
+  
+  .break-inside-avoid {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Reset container widths for full page print */
+  #printable-map {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    border: none !important; /* We'll use inner borders for pages */
+    background: white !important; /* Fallback if background image fails */
+  }
+}
