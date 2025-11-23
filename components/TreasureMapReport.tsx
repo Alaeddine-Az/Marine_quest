@@ -37,7 +37,7 @@ const TreasureMapReport: React.FC<TreasureMapReportProps> = ({ insights, clientN
     // Helper for footer
     const Footer = () => (
         <div className="mt-auto pt-8 border-t border-gold/30 text-center opacity-60 text-xs font-serif text-wood-dark print:fixed print:bottom-4 print:left-0 print:right-0 print:opacity-100">
-            <p>Compiled aboard the S.S. Insight • Powered by Maritime Quest • maritimequest.io</p>
+            <p>Compiled aboard the S.S. Insight • Powered by KTB Marine</p>
         </div>
     );
 
