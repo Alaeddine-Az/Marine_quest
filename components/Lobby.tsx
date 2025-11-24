@@ -45,32 +45,32 @@ const Lobby: React.FC<LobbyProps> = ({ onStartGame }) => {
         }
     }, [isMultiplayer, roomId]);
 
-    // --- Welcome Audio ---
-    const hasPlayedWelcome = useRef(false);
+    // --- Welcome Audio - DISABLED ---
+    // const hasPlayedWelcome = useRef(false);
 
-    useEffect(() => {
-        const playWelcome = async () => {
-            if (teams.length === 0) {
-                hasPlayedWelcome.current = false;
-                return;
-            }
-
-            if (hasPlayedWelcome.current) return;
-
-            hasPlayedWelcome.current = true;
-            try {
-                const welcomeText = "Ahoy! Welcome aboard the S.S. Insight! I am Captain Morgana. Assemble your crew, for we set sail shortly!";
-                const audioBuffer = await generatePirateReaction(CardType.ROSE, welcomeText);
-                if (audioBuffer) {
-                    audioPlayer.playBuffer(audioBuffer);
-                }
-            } catch (e) {
-                console.error("Failed to play welcome audio", e);
-            }
-        };
-
-        playWelcome();
-    }, [teams]);
+    // useEffect(() => {
+    //     const playWelcome = async () => {
+    //         if (teams.length === 0) {
+    //             hasPlayedWelcome.current = false;
+    //             return;
+    //         }
+    //
+    //         if (hasPlayedWelcome.current) return;
+    //
+    //         hasPlayedWelcome.current = true;
+    //         try {
+    //             const welcomeText = "Ahoy! Welcome aboard the S.S. Insight! I am Captain Morgana. Assemble your crew, for we set sail shortly!";
+    //             const audioBuffer = await generatePirateReaction(CardType.ROSE, welcomeText);
+    //             if (audioBuffer) {
+    //                 audioPlayer.playBuffer(audioBuffer);
+    //             }
+    //         } catch (e) {
+    //             console.error("Failed to play welcome audio", e);
+    //         }
+    //     };
+    //
+    //     playWelcome();
+    // }, [teams]);
 
     const addTeam = () => {
         if (!newTeamName.trim()) return;

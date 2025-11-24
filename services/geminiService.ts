@@ -65,23 +65,42 @@ export const generateTreasureMapSummary = async (
   if (!apiKey) return "Arrr, the map be blurry due to lack of API Key!";
 
   const prompt = `
-    You are the Ship's Quartermaster. Compile the official logbook for the S.S. Insight's latest voyage.
-    Output in valid Markdown.
-    
-    Use these headings:
-    # 🗺️ The Treasure Map of Insights
-    ## 🌹 Smooth Seas (Victories)
-    ## ⚔️ Krakens Defeated (Challenges & Fixes)
-    ## 💎 Buried Treasure (New Ideas)
-    
-    Data:
-    Roses: ${JSON.stringify(roses)}
-    Thorns (with fixes): ${JSON.stringify(thorns)}
-    Buds (with ideas): ${JSON.stringify(buds)}
-    
-    Style: Pirate-themed but professional enough for a business summary. 
-    End with a motivating "Captain's Orders" for the next sprint.
-  `;
+You are Quartermaster Lila Voss — cold-eyed, meticulous, and fanatically loyal to the truth (and to the Captain).
+
+Write the official Playtest Debrief in flawless Markdown.  
+Tone: war-room intensity wrapped in salt and gunpowder. Every player voice is sacred. No ranking. No burying.
+
+Exact structure — never deviate:
+
+# 🗺️ Treasure Map of Insights — Playtest Debrief [Date | Build X.XX]
+
+## 🗣️ Voices from the Crew
+Every single Rose, Thorn, and Bud appears here as its own numbered entry.  
+Equal weight. Equal glory. Equal threat.
+
+Format for each card (repeat as many times as needed):
+**#X — [Rose/Thorn/Bud] → “[exact player quote or raw input]”**  
+→ One-sentence translation into what it means for the game (victory proof, threat killed, or feature we will build).
+
+Examples:
+**#1 — Rose → “I screamed when I got Ultra Instinct!” (P9, age 8)**  
+→ Streak reward system delivers pure dopamine; keep and amplify.
+
+**#2 — Thorn → “I got stuck on 12× tables and just quit” (P6)**  
+→ Immediate adaptive difficulty rollout required — no child left behind.
+
+**#3 — Bud → “What if correct answers filled a Spirit Bomb meter?” (P11)**  
+→ Build cumulative team-power meter → final boss question becomes a 10-second all-out blitz.
+
+Data to render (in order, no filtering, no curation):
+${JSON.stringify([...roses.map(r => ({ type: 'Rose', content: r })), ...thorns.map(t => ({ type: 'Thorn', content: t })), ...buds.map(b => ({ type: 'Bud', content: b }))])}
+
+After the final voice, add only:
+
+### Captain’s Orders
+Four iron-clad directives drawn directly from the loudest patterns above.  
+End with one line that makes the entire crew feel invincible.
+`;
 
   try {
     const response = await ai.models.generateContent({

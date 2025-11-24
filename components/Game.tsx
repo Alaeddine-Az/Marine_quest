@@ -183,14 +183,14 @@ const Game: React.FC<GameProps> = ({ teams: initialTeams, cards, onReset, roomId
 
       setVictoryData("REPORT_READY");
 
-      // Generate audio for the summary
-      if (!hasPlayedVictory.current) {
-        hasPlayedVictory.current = true;
-        const audioBuffer = await generatePirateReaction(CardType.ROSE, "The voyage is complete! Here is your treasure map of insights: " + summary.substring(0, 100) + "...");
-        if (audioBuffer) {
-          audioPlayer.playBuffer(audioBuffer);
-        }
-      }
+      // Generate audio for the summary - DISABLED
+      // if (!hasPlayedVictory.current) {
+      //   hasPlayedVictory.current = true;
+      //   const audioBuffer = await generatePirateReaction(CardType.ROSE, "The voyage is complete! Here is your treasure map of insights: " + summary.substring(0, 100) + "...");
+      //   if (audioBuffer) {
+      //     audioPlayer.playBuffer(audioBuffer);
+      //   }
+      // }
     } catch (e) {
       console.error("Error generating victory summary/audio", e);
     } finally {
