@@ -343,7 +343,7 @@ const Game: React.FC<GameProps> = ({ teams: initialTeams, cards, onReset, roomId
                         {currentCard.type === CardType.THORN ? "Identify the solution, mates!" : "Pitch your idea for treasure!"}
                       </h3>
                       <textarea
-                        className="w-full bg-black/30 text-white border border-white/10 rounded p-4 mb-4 focus:ring-2 focus:ring-gold outline-none resize-none h-32 backdrop-blur-sm"
+                        className="w-full bg-black/30 text-white border border-white/10 rounded p-4 mb-4 focus:ring-2 focus:ring-gold outline-none resize-none h-32 backdrop-blur-sm font-serif text-lg italic"
                         placeholder={roomId ? "Waiting for crew submission from mobile..." : "Type here..."}
                         value={userInput}
                         onChange={(e) => setUserInput(e.target.value)}
