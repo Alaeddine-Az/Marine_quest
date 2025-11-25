@@ -13,6 +13,7 @@ const TreasureMapReport: React.FC<TreasureMapReportProps> = ({ insights, clientN
     const roses = insights.filter(i => i.card.type === CardType.ROSE);
     const thorns = insights.filter(i => i.card.type === CardType.THORN);
     const buds = insights.filter(i => i.card.type === CardType.BUD);
+    const others = insights.filter(i => i.card.type === CardType.OTHER);
 
     // Find top voted bud
     const topBud = buds.reduce((prev, current) => {
@@ -96,41 +97,41 @@ const TreasureMapReport: React.FC<TreasureMapReportProps> = ({ insights, clientN
                 </div>
 
                 {/* --- PAGE 2: EXECUTIVE OVERVIEW --- */}
-                <div className="min-h-[1100px] p-16 print:p-8 relative border-filigree break-after-page print:min-h-0">
-                    <h2 className="text-5xl font-pirate text-center text-wood-dark mb-8 border-b-2 border-gold pb-4">Executive Overview</h2>
+                <div className="min-h-[1100px] p-10 print:p-6 relative border-filigree break-after-page print:min-h-0">
+                    <h2 className="text-4xl font-pirate text-center text-wood-dark mb-6 border-b-2 border-gold pb-3">Executive Overview</h2>
 
-                    <div className="grid grid-cols-1 gap-6">
+                    <div className="grid grid-cols-1 gap-5">
                         {/* Victories Summary */}
-                        <div className="flex items-start gap-6">
-                            <div className="text-6xl bg-emerald-100 p-6 rounded-full border-2 border-emerald-600 shadow-sm">🌹</div>
-                            <div>
-                                <h3 className="text-3xl font-cinzel text-emerald-900 mb-2">Smooth Seas</h3>
-                                <p className="font-crimson text-lg text-wood-dark leading-relaxed">
-                                    The team consistently delivers timely, knowledgeable, and proactive support across marine operations—from laytime calculations and vessel lineups to contractual guidance, data management, and weekly voyage planning. Communication is clear and responsive, and tools like ClickUp and fuel trackers help streamline workflows, making it easy to stay on top of deadlines and collaborate effectively. Overall, the group’s expertise and willingness to assist make them a valued and reliable partner for both routine and ad hoc operational needs.
-                                </p>
+                        <div>
+                            <div className="flex items-center gap-2 mb-2">
+                                <div className="text-2xl bg-emerald-100 p-2 rounded-full border-2 border-emerald-600 shadow-sm flex-shrink-0">🌹</div>
+                                <h3 className="text-2xl font-cinzel text-emerald-900">Smooth Seas</h3>
                             </div>
+                            <p className="font-crimson text-base text-wood-dark leading-relaxed">
+                                The team consistently delivers timely, knowledgeable, and proactive support across marine operations—from laytime calculations and vessel lineups to contractual guidance, data management, and weekly voyage planning. Communication is clear and responsive, and tools like ClickUp and fuel trackers help streamline workflows, making it easy to stay on top of deadlines and collaborate effectively. Overall, the group's expertise and willingness to assist make them a valued and reliable partner for both routine and ad hoc operational needs.
+                            </p>
                         </div>
 
                         {/* Challenges Summary */}
-                        <div className="flex items-start gap-6">
-                            <div className="text-6xl bg-rose-100 p-6 rounded-full border-2 border-rose-600 shadow-sm">⚔️</div>
-                            <div>
-                                <h3 className="text-3xl font-cinzel text-rose-900 mb-2">Krakens Defeated</h3>
-                                <p className="font-crimson text-lg text-wood-dark leading-relaxed">
-                                    We’re looking to improve access to time charter data and assess inefficiencies from multiple angles, focusing on factors within our control. There’s a preference for more relaxed, high-level MMT presentations and a collaborative, discussion-driven approach, while recognizing that urgent operational tasks may take priority over routine updates. Some processes, like laycan and narrowing lists, remain complex and may require further familiarization.
-                                </p>
+                        <div>
+                            <div className="flex items-center gap-2 mb-2">
+                                <div className="text-2xl bg-rose-100 p-2 rounded-full border-2 border-rose-600 shadow-sm flex-shrink-0">⚔️</div>
+                                <h3 className="text-2xl font-cinzel text-rose-900">Krakens Defeated</h3>
                             </div>
+                            <p className="font-crimson text-base text-wood-dark leading-relaxed">
+                                We're looking to improve access to time charter data and assess inefficiencies from multiple angles, focusing on factors within our control. There's a preference for more relaxed, high-level MMT presentations and a collaborative, discussion-driven approach, while recognizing that urgent operational tasks may take priority over routine updates. Some processes, like laycan and narrowing lists, remain complex and may require further familiarization.
+                            </p>
                         </div>
 
                         {/* Ideas Summary */}
-                        <div className="flex items-start gap-6">
-                            <div className="text-6xl bg-amber-100 p-6 rounded-full border-2 border-amber-600 shadow-sm">💎</div>
-                            <div>
-                                <h3 className="text-3xl font-cinzel text-amber-900 mb-2">Buried Treasure</h3>
-                                <p className="font-crimson text-lg text-wood-dark leading-relaxed">
-                                    We’re looking for continued support from KTB in deepening our operational understanding, streamlining processes, and improving access to actionable data. As our business evolves—especially with new opportunities in China and ongoing operational challenges—there’s value in targeted insights, enhanced communication, and regular, focused meetings to address chartering, demurrage, contracting, and automation, all aimed at making our decision-making and workflows more efficient.
-                                </p>
+                        <div>
+                            <div className="flex items-center gap-2 mb-2">
+                                <div className="text-2xl bg-amber-100 p-2 rounded-full border-2 border-amber-600 shadow-sm flex-shrink-0">💎</div>
+                                <h3 className="text-2xl font-cinzel text-amber-900">Buried Treasure</h3>
                             </div>
+                            <p className="font-crimson text-base text-wood-dark leading-relaxed">
+                                We're looking for continued support from KTB in deepening our operational understanding, streamlining processes, and improving access to actionable data. As our business evolves—especially with new opportunities in China and ongoing operational challenges—there's value in targeted insights, enhanced communication, and regular, focused meetings to address chartering, demurrage, contracting, and automation, all aimed at making our decision-making and workflows more efficient.
+                            </p>
                         </div>
                     </div>
 
@@ -140,11 +141,11 @@ const TreasureMapReport: React.FC<TreasureMapReportProps> = ({ insights, clientN
                 </div>
 
                 {/* --- PAGE 3: DETAILED INSIGHTS --- */}
-                <div className="min-h-[1100px] p-16 print:p-8 relative border-filigree print:min-h-0">
+                <div className="min-h-[1100px] p-10 print:p-6 relative border-filigree print:min-h-0">
 
                     {/* ROSES */}
                     {roses.length > 0 && (
-                        <section className="mb-12 break-inside-avoid">
+                        <section className="mb-10 break-inside-avoid">
                             <h3 className="text-4xl font-pirate text-emerald-800 mb-6 border-b border-emerald-800/30 pb-2">
                                 🌹 Smooth Seas (Victories)
                             </h3>
@@ -161,7 +162,7 @@ const TreasureMapReport: React.FC<TreasureMapReportProps> = ({ insights, clientN
 
                     {/* THORNS */}
                     {thorns.length > 0 && (
-                        <section className="mb-12 break-inside-avoid">
+                        <section className="mb-10 break-inside-avoid">
                             <h3 className="text-4xl font-pirate text-rose-900 mb-6 border-b border-rose-900/30 pb-2">
                                 ⚔️ Krakens Defeated
                             </h3>
@@ -200,7 +201,7 @@ const TreasureMapReport: React.FC<TreasureMapReportProps> = ({ insights, clientN
 
                     {/* BUDS */}
                     {buds.length > 0 && (
-                        <section className="mb-12 break-inside-avoid">
+                        <section className="mb-10 break-inside-avoid">
                             <h3 className="text-4xl font-pirate text-amber-800 mb-6 border-b border-amber-800/30 pb-2">
                                 💎 Buried Treasure
                             </h3>
@@ -231,8 +232,47 @@ const TreasureMapReport: React.FC<TreasureMapReportProps> = ({ insights, clientN
                         </section>
                     )}
 
+                    {/* OTHER (Open Discussion) */}
+                    {others.length > 0 && (
+                        <section className="mb-10 break-inside-avoid">
+                            <h3 className="text-4xl font-pirate text-indigo-800 mb-6 border-b border-indigo-800/30 pb-2">
+                                💬 Open Discussion
+                            </h3>
+                            <div className="space-y-6">
+                                {others.map((other, idx) => (
+                                    <div key={idx} className="bg-indigo-50/30 p-4 rounded border-l-4 border-indigo-800 break-inside-avoid">
+                                        <p className="font-cinzel text-lg text-indigo-900 font-bold mb-2">"{other.card.content}"</p>
+                                        <div className="pl-4 border-l border-indigo-300 ml-1">
+                                            <p className="font-crimson text-xl text-black whitespace-pre-wrap">
+                                                {other.userInput || <span className="italic text-gray-500">No additional topics discussed</span>}
+                                            </p>
+                                            {other.userInput && (
+                                                <div className="flex items-center gap-4 mt-2">
+                                                    <div className="flex items-center gap-1" title={`${other.votes.up} Upvotes`}>
+                                                        {Array.from({ length: Math.min(5, other.votes.up) }).map((_, i) => (
+                                                            <span key={i} className="text-lg">🔥</span>
+                                                        ))}
+                                                        <span className="text-xs text-gray-500 font-bold">({other.votes.up})</span>
+                                                    </div>
+                                                    {other.votes.down > 0 && (
+                                                        <div className="flex items-center gap-1" title={`${other.votes.down} Downvotes`}>
+                                                            {Array.from({ length: Math.min(5, other.votes.down) }).map((_, i) => (
+                                                                <span key={i} className="text-lg">⛈</span>
+                                                            ))}
+                                                            <span className="text-xs text-gray-500 font-bold">({other.votes.down})</span>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
                     {/* CAPTAIN'S ORDERS */}
-                    <section className="mt-16 p-8 bg-wood-dark text-parchment rounded-lg relative break-inside-avoid print:bg-transparent print:text-black print:border-4 print:border-wood-dark">
+                    <section className="mt-12 mb-8 p-8 bg-wood-dark text-parchment rounded-lg relative break-inside-avoid print:bg-transparent print:text-black print:border-4 print:border-wood-dark">
                         <h3 className="text-3xl font-pirate text-gold mb-4 text-center">Captain's Orders</h3>
                         <p className="font-crimson text-xl italic leading-relaxed text-center">
                             "{captainsOrders || "The winds are favorable. Take these insights and chart a course for success! The S.S. Insight awaits your return."}"
@@ -240,9 +280,7 @@ const TreasureMapReport: React.FC<TreasureMapReportProps> = ({ insights, clientN
                         <div className="text-center mt-4 font-pirate text-2xl text-gold opacity-80">- Captain Alta</div>
                     </section>
 
-                    <div className="mt-16">
-                        <Footer />
-                    </div>
+                    <Footer />
                 </div>
 
             </div>

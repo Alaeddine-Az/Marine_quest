@@ -201,7 +201,8 @@ body {
 /* PRINT STYLES */
 @media print {
   @page {
-    margin: 0.75in;
+    margin: 0.75in 0.75in 1.25in 0.75in;
+    /* top, right, bottom, left - extra bottom for footer */
     size: letter;
   }
 
@@ -254,12 +255,44 @@ body {
     padding: 2rem !important;
   }
 
+  .print\:p-6 {
+    padding: 1.5rem !important;
+  }
+
   .print\:w-full {
     width: 100% !important;
   }
 
   .print\:max-w-none {
     max-width: none !important;
+  }
+
+  .print\:min-h-0 {
+    min-height: 0 !important;
+  }
+
+  .print\:pb-20 {
+    padding-bottom: 5rem !important;
+  }
+
+  .print\:fixed {
+    position: fixed !important;
+  }
+
+  .print\:bottom-4 {
+    bottom: 1rem !important;
+  }
+
+  .print\:left-0 {
+    left: 0 !important;
+  }
+
+  .print\:right-0 {
+    right: 0 !important;
+  }
+
+  .print\:opacity-100 {
+    opacity: 1 !important;
   }
 
   /* Page Breaks */
@@ -280,5 +313,20 @@ body {
     margin: 0 !important;
     border: none !important;
     /* We'll use inner borders for pages */
+  }
+
+  /* Ensure content doesn't overlap footer - add bottom padding to page containers */
+  .border-filigree {
+    padding-bottom: 6rem !important;
+    /* Space for footer */
+    position: relative;
+  }
+
+  /* Position footer at bottom of each page */
+  .border-filigree>div:last-child {
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    right: 0;
   }
 }
