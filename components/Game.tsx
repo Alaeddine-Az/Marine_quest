@@ -20,7 +20,14 @@ interface GameProps {
 
 const Game: React.FC<GameProps> = ({ teams: initialTeams, cards, onReset, roomId, clientName, clientLogo }) => {
   const [teams, setTeams] = useState<Team[]>(initialTeams);
-  const [deck, setDeck] = useState<CardData[]>([...cards].sort(() => Math.random() - 0.5));
+
+  // Separate OTHER card and shuffle the rest, then append OTHER at the end
+  const otherCard = cards.find(c => c.type === CardType.OTHER);
+  const regularCards = cards.filter(c => c.type !== CardType.OTHER);
+  const shuffledDeck = [...regularCards].sort(() => Math.random() - 0.5);
+  const finalDeck = otherCard ? [...shuffledDeck, otherCard] : shuffledDeck;
+
+  const [deck, setDeck] = useState<CardData[]>(finalDeck);
   const [currentCard, setCurrentCard] = useState<CardData | null>(null);
 
   // Game State
@@ -150,6 +157,7 @@ const Game: React.FC<GameProps> = ({ teams: initialTeams, cards, onReset, roomId
       case CardType.ROSE: return "Ah, a fair wind fills our sails! Well done, mates!";
       case CardType.THORN: return "Batten down the hatches! A storm approaches. How do we survive?";
       case CardType.BUD: return "I spy gold on the horizon! What treasure awaits us?";
+      case CardType.OTHER: return "The winds have calmed... Is there anything else on the horizon we should discuss?";
       default: return "The sea is mysterious today...";
     }
   };
@@ -172,8 +180,9 @@ const Game: React.FC<GameProps> = ({ teams: initialTeams, cards, onReset, roomId
       const roses = insights.current.filter(i => i.card.type === CardType.ROSE).map(i => i.card.content);
       const thorns = insights.current.filter(i => i.card.type === CardType.THORN).map(i => `${i.card.content} -> ${i.userInput}`);
       const buds = insights.current.filter(i => i.card.type === CardType.BUD).map(i => `${i.card.content} -> ${i.userInput}`);
+      const others = insights.current.filter(i => i.card.type === CardType.OTHER).map(i => `${i.card.content} -> ${i.userInput}`);
 
-      const summary = await generateTreasureMapSummary(roses, thorns, buds);
+      const summary = await generateTreasureMapSummary(roses, thorns, buds, others);
 
       // Generate Captain's Orders
       const winningTeam = [...teams].sort((a, b) => b.score - a.score)[0]?.name || "Unknown Crew";
@@ -226,6 +235,10 @@ const Game: React.FC<GameProps> = ({ teams: initialTeams, cards, onReset, roomId
       if (votes.up > 5) points += 10;
       else if (votes.up > 2) points += 5;
       triggerParticles("💎");
+    } else if (currentCard.type === CardType.OTHER) {
+      points = 10;
+      if (votes.up > 3) points += 5;
+      triggerParticles("💬");
     }
 
     // Record Insight
@@ -340,7 +353,11 @@ const Game: React.FC<GameProps> = ({ teams: initialTeams, cards, onReset, roomId
                   {phase === TurnPhase.ACTION && (
                     <>
                       <h3 className="text-xl font-pirate text-gold mb-4 text-glow-gold">
-                        {currentCard.type === CardType.THORN ? "Identify the solution, mates!" : "Pitch your idea for treasure!"}
+                        {currentCard.type === CardType.THORN
+                          ? "Identify the solution, mates!"
+                          : currentCard.type === CardType.OTHER
+                            ? "Share what's on your mind, crew!"
+                            : "Pitch your idea for treasure!"}
                       </h3>
                       <textarea
                         className="w-full bg-black/30 text-white border border-white/10 rounded p-4 mb-4 focus:ring-2 focus:ring-gold outline-none resize-none h-32 backdrop-blur-sm font-serif text-lg italic"
@@ -348,7 +365,6 @@ const Game: React.FC<GameProps> = ({ teams: initialTeams, cards, onReset, roomId
                         value={userInput}
                         onChange={(e) => setUserInput(e.target.value)}
                         readOnly={!!roomId}
-                        onKeyDown={(e) => { if (!roomId && e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleActionSubmit(); } }}
                       />
                       <button
                         onClick={() => handleActionSubmit()}

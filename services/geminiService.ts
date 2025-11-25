@@ -14,7 +14,7 @@ export const generatePirateReaction = async (cardType: CardType, content: string
 
   // "Kore" is often a good option for a female voice in GenAI configs.
   const prompt = `
-    Roleplay as Captain Morgana, the sultry, confident, and slightly dangerous pirate captain of the S.S. Insight.
+    Roleplay as Captain Alta, the sultry, confident, and slightly dangerous pirate captain of the S.S. Insight.
     You are addressing your crew in a game of "Rose, Bud, Thorn".
     
     The current card is a ${cardType}.
@@ -60,7 +60,8 @@ export const generatePirateReaction = async (cardType: CardType, content: string
 export const generateTreasureMapSummary = async (
   roses: string[],
   thorns: string[],
-  buds: string[]
+  buds: string[],
+  others: string[] = []
 ): Promise<string> => {
   if (!apiKey) return "Arrr, the map be blurry due to lack of API Key!";
 
@@ -75,11 +76,11 @@ Exact structure — never deviate:
 # 🗺️ Treasure Map of Insights — Playtest Debrief [Date | Build X.XX]
 
 ## 🗣️ Voices from the Crew
-Every single Rose, Thorn, and Bud appears here as its own numbered entry.  
+Every single Rose, Thorn, Bud, and Other appears here as its own numbered entry.  
 Equal weight. Equal glory. Equal threat.
 
 Format for each card (repeat as many times as needed):
-**#X — [Rose/Thorn/Bud] → “[exact player quote or raw input]”**  
+**#X — [Rose/Thorn/Bud/Other] → "[exact player quote or raw input]"**  
 → One-sentence translation into what it means for the game (victory proof, threat killed, or feature we will build).
 
 Examples:
@@ -93,7 +94,7 @@ Examples:
 → Build cumulative team-power meter → final boss question becomes a 10-second all-out blitz.
 
 Data to render (in order, no filtering, no curation):
-${JSON.stringify([...roses.map(r => ({ type: 'Rose', content: r })), ...thorns.map(t => ({ type: 'Thorn', content: t })), ...buds.map(b => ({ type: 'Bud', content: b }))])}
+${JSON.stringify([...roses.map(r => ({ type: 'Rose', content: r })), ...thorns.map(t => ({ type: 'Thorn', content: t })), ...buds.map(b => ({ type: 'Bud', content: b })), ...others.map(o => ({ type: 'Other', content: o }))])}
 
 After the final voice, add only:
 
@@ -125,7 +126,7 @@ export const generateCaptainsOrders = async (
   if (!apiKey) return "Captain's Orders: Sail forth and conquer! (API Key missing)";
 
   const prompt = `
-    Roleplay as Captain Morgana. Write a single, dramatic, and inspiring closing paragraph for the "Treasure Map of Insights" report for our client, "${clientName}".
+    Roleplay as Captain Alta. Write a single, dramatic, and inspiring closing paragraph for the "Treasure Map of Insights" report for our client, "${clientName}".
     
     Context:
     - The winning crew is "${winningTeam}".

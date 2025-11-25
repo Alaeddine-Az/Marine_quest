@@ -47,6 +47,14 @@ const Card: React.FC<CardProps> = ({ data, isRevealed, onClick }) => {
           title: 'Bud',
           textColor: 'text-amber-100'
         };
+      case CardType.OTHER:
+        return {
+          bg: 'bg-gradient-to-br from-indigo-900 to-purple-800',
+          border: 'border-indigo-400',
+          icon: '💬',
+          title: 'Other',
+          textColor: 'text-indigo-100'
+        };
       default: return { bg: 'bg-slate-700', border: 'border-slate-500', icon: '❓', title: '?', textColor: 'text-white' };
     }
   };
@@ -55,7 +63,7 @@ const Card: React.FC<CardProps> = ({ data, isRevealed, onClick }) => {
 
   return (
     <div
-      className="relative w-72 h-[28rem] perspective-1000 cursor-pointer group select-none"
+      className="relative w-96 h-[32rem] perspective-1000 cursor-pointer group select-none"
       onClick={onClick}
     >
       <div

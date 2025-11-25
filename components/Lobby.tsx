@@ -59,7 +59,7 @@ const Lobby: React.FC<LobbyProps> = ({ onStartGame }) => {
     //
     //         hasPlayedWelcome.current = true;
     //         try {
-    //             const welcomeText = "Ahoy! Welcome aboard the S.S. Insight! I am Captain Morgana. Assemble your crew, for we set sail shortly!";
+    //             const welcomeText = "Ahoy! Welcome aboard the S.S. Insight! I am Captain Alta. Assemble your crew, for we set sail shortly!";
     //             const audioBuffer = await generatePirateReaction(CardType.ROSE, welcomeText);
     //             if (audioBuffer) {
     //                 audioPlayer.playBuffer(audioBuffer);

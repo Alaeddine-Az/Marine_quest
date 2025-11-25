@@ -2,6 +2,7 @@ export enum CardType {
   ROSE = 'ROSE',
   THORN = 'THORN',
   BUD = 'BUD',
+  OTHER = 'OTHER',
 }
 
 export interface CardData {
